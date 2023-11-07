@@ -1,14 +1,20 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import dotenv from 'dotenv'
 import authRouter from './router/authRoute.js'
+import dotenv from 'dotenv'
 dotenv.config()
 
 const app = express()
 app.use(express.json()) 
 
-mongoose
-  .connect(process.env.MONGO)
+mongoose 
+  .connect(process.env.MONGO
+  //    ,{
+  //   useNewUrlParser: true,
+  //   useUnifiedTopology: true,
+  //   serverSelectionTimeoutMS: 50000,
+  // }
+  )
   .then(() => {
     console.log("mongodb is connected");
   })
