@@ -13,10 +13,15 @@ import AdminSign from "./pages/AdminSign";
 import AdminLog from "./pages/AdminLog";
 import AdminList from "./pages/Admin";
 import AdminNav from "./componetes/adminNav/AdminNav";
+import AdminProfile from "./pages/AdminProfile";
 
 function App() {
-  const [loginMail , setLoginMail ] = useState({})
+  const [loginMail , setLoginMail ] = useState('')
   const [navBar ,setNavBar ] = useState(true)
+  
+  const adminNavHandle = () =>setNavBar(false)
+  const  userNavHandle = () =>setNavBar(true);
+  
   return (
     <div>
       {navBar ? (
@@ -30,21 +35,15 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        {navBar ? (
-          <Route path="/signup" element={<SignUpPage navBar={navBar} />} />
-        ) : (
-          <Route path="/adminSign" element={<AdminSign navBar={navBar} />} />
-        )}
-        <Route
-          path="/login"
-          element={<LoginPage setLoginMail={setLoginMail} />}
-        />
-        <Route path="/account" element={<Account loginMail={loginMail} />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/adminList" element={<AdminList />} />
-        {/* <Route path="/adminSign" element={<AdminSign navBar={navBar} />} /> */}
-        <Route path="/adminLog" element={<AdminLog />} />
         <Route path="/catalog" element={<Catalog />} />
+        <Route path="/account" element={<Account loginMail={loginMail} />} />
+          <Route path="/signup" element={<SignUpPage adminNavHandle={adminNavHandle} />}/>
+        <Route path="/login"element={<LoginPage setLoginMail={setLoginMail} />}/>
+          <Route path="/adminSign" element={<AdminSign userNavHandle={userNavHandle} />}/>
+       <Route path="/adminList" element={<AdminList />} />
+        <Route path="/adminLog" element={<AdminLog />} />
+        <Route path="/adminProfile" element={<AdminProfile />} />
       </Routes>
       <Footer />
     </div>

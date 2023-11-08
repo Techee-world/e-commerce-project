@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {Link , useNavigate} from 'react-router-dom'
 
-function SignUpPage({ navBar }) {
+function SignUpPage({ adminNavHandle }) {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
@@ -37,9 +37,11 @@ function SignUpPage({ navBar }) {
   return (
     <div>
       <main className="flex flex-col  justify-between">
-      
-        <Link to="/adminSign" >
-          <h1 className="bg-green-200 text-center uppercase p-2 hover:bg-gray-400 duration-700 cursor-pointer">
+        <Link to="/adminSign">
+          <h1
+            onClick={adminNavHandle}
+            className="bg-green-200 text-center uppercase p-2 hover:bg-gray-400 duration-700 cursor-pointer"
+          >
             admin page
           </h1>
         </Link>

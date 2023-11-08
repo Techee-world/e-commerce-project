@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function AdminSign({ navBar }) {
+function AdminSign({ userNavHandle }) {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ function AdminSign({ navBar }) {
         return;
       }
       setErrors(null);
-      navigate("/adminLogin");
+      navigate("/adminLog");
     } catch (error) {
       setErrors(error.message);
     }
@@ -37,13 +37,14 @@ function AdminSign({ navBar }) {
   return (
     <div>
       <main className="flex flex-col  justify-between">
-        
-          <Link to="/signup" >
-            <h1 className="bg-green-200 text-center uppercase p-2 hover:bg-gray-400 duration-700 cursor-pointer">
-              user page
-            </h1>
-          </Link>
-        
+        <Link to="/signup">
+          <h1
+            onClick={userNavHandle}
+            className="bg-green-200 text-center uppercase p-2 hover:bg-gray-400 duration-700 cursor-pointer"
+          >
+            user page
+          </h1>
+        </Link>
 
         <section className="mx-auto mt-10 w-full flex-grow mb-10 max-w-[1200px] px-5">
           <div className="container mx-auto border px-5 py-5 shadow-sm md:w-1/2">

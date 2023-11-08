@@ -11,18 +11,18 @@ function AdminLog({ setLoginMail }) {
       [event.target.name]: event.target.value,
     });
   }
-  async function submitHandle(event) {
+  async function adminSubmitHandle(event) {
     setLoginMail(formData);
     try {
       event.preventDefault();
-      const res = await fetch("/backend/adminLog", {
+      const respond = await fetch("/backend/adminLog", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-      const data = await res.json();
+      const data = await respond.json();
       console.log(data, "data is that");
       if (data.success === false) {
         setErrors(data.message);
@@ -41,11 +41,11 @@ function AdminLog({ setLoginMail }) {
         <section className="mx-auto mt-10 w-full flex-grow mb-10 max-w-[1200px] px-5">
           <div className="container mx-auto border px-5 py-5 shadow-sm md:w-1/2">
             <div className="">
-              <p className="text-4xl font-bold uppercase">login </p>
-              <p>welcome costumer</p>
+              <p className="text-4xl font-bold uppercase">admin login </p>
+              <p>welcome admin</p>
             </div>
 
-            <form onClick={submitHandle} className="mt-6 flex flex-col">
+            <form onClick={adminSubmitHandle} className="mt-6 flex flex-col">
               <label className="mt-3">Email Address</label>
               <input
                 onChange={inputHandler}

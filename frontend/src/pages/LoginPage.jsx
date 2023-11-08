@@ -6,7 +6,7 @@ function LoginPage({ setLoginMail }) {
   const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
   function inputHandler(event) {
-    setFormData({
+    setFormData({ 
       ...formData,
       [event.target.name]: event.target.value,
     });
