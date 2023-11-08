@@ -8,7 +8,7 @@ function Footer() {
 
   return (
     <div>
-      <footer class="mx-auto bg-green-100 w-full max-w-[1200px] justify-between pb-10 flex flex-col lg:flex-row">
+      <footer class="mx-auto bg-green-100 w-full max-w-[1217px] justify-between pb-10 flex flex-col lg:flex-row">
         <div class="ml-5">
           <img
             class="mt-10 mb-5"

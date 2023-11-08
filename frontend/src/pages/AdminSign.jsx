@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function LoginPage({ setLoginMail }) {
+function AdminSign({ navBar }) {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
@@ -12,10 +12,9 @@ function LoginPage({ setLoginMail }) {
     });
   }
   async function submitHandle(event) {
-    setLoginMail(formData)
     try {
       event.preventDefault();
-      const res = await fetch("/backend/login", {
+      const res = await fetch("/backend/adminSign", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,7 +28,7 @@ function LoginPage({ setLoginMail }) {
         return;
       }
       setErrors(null);
-      navigate("/");
+      navigate("/adminLogin");
     } catch (error) {
       setErrors(error.message);
     }
@@ -38,14 +37,31 @@ function LoginPage({ setLoginMail }) {
   return (
     <div>
       <main className="flex flex-col  justify-between">
+        
+          <Link to="/signup" >
+            <h1 className="bg-green-200 text-center uppercase p-2 hover:bg-gray-400 duration-700 cursor-pointer">
+              user page
+            </h1>
+          </Link>
+        
+
         <section className="mx-auto mt-10 w-full flex-grow mb-10 max-w-[1200px] px-5">
           <div className="container mx-auto border px-5 py-5 shadow-sm md:w-1/2">
             <div className="">
-              <p className="text-4xl font-bold uppercase">login </p>
-              <p>welcome costumer</p>
+              <p className="text-4xl font-bold">CREATE AN ACCOUNT</p>
+              <p>Register for new Admin</p>
             </div>
 
             <form onClick={submitHandle} className="mt-6 flex flex-col">
+              <label>user Name</label>
+              <input
+                onChange={inputHandler}
+                className="mb-3 mt-3 border px-4 py-2"
+                type="text"
+                placeholder="full name..."
+                name="userName"
+              />
+
               <label className="mt-3">Email Address</label>
               <input
                 onChange={inputHandler}
@@ -77,15 +93,15 @@ function LoginPage({ setLoginMail }) {
               </div>
 
               <button className="my-5 w-full bg-violet-900 py-2 text-white">
-                LOG IN
+                CREATE ACCOUNT
               </button>
             </form>
             <p className="text-center">
               Already have an account?
-              <Link to="/signup">
+              <Link to="/adminLog">
                 {" "}
                 <span href="login.html" className="text-violet-900">
-                  sign up
+                  Login now
                 </span>
               </Link>
             </p>
@@ -100,4 +116,4 @@ function LoginPage({ setLoginMail }) {
   );
 }
 
-export default LoginPage;
+export default AdminSign;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function LoginPage({ setLoginMail }) {
+function AdminLog({ setLoginMail }) {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
@@ -12,10 +12,10 @@ function LoginPage({ setLoginMail }) {
     });
   }
   async function submitHandle(event) {
-    setLoginMail(formData)
+    setLoginMail(formData);
     try {
       event.preventDefault();
-      const res = await fetch("/backend/login", {
+      const res = await fetch("/backend/adminLog", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,7 +29,7 @@ function LoginPage({ setLoginMail }) {
         return;
       }
       setErrors(null);
-      navigate("/");
+      navigate("/adminList");
     } catch (error) {
       setErrors(error.message);
     }
@@ -82,7 +82,7 @@ function LoginPage({ setLoginMail }) {
             </form>
             <p className="text-center">
               Already have an account?
-              <Link to="/signup">
+              <Link to="/adminSing">
                 {" "}
                 <span href="login.html" className="text-violet-900">
                   sign up
@@ -100,4 +100,4 @@ function LoginPage({ setLoginMail }) {
   );
 }
 
-export default LoginPage;
+export default AdminLog;

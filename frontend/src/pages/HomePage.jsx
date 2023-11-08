@@ -8,13 +8,14 @@ import Recommend from '../componetes/home/Recommend'
 function HomePage() {
   return (
     <div>
-        <Home />
-        <Categories />
-        <NewArrival />
-        <Ad />
-        <Recommend />
+      <Home />
+      <Categories />
+      <NewArrival />
+      <Ad />
+      <p class="mx-auto mt-10 mb-5 max-w-[1200px] px-5">RECOMMENDED FOR YOU</p>
+      <Recommend />
     </div>
-  )
+  );
 }
 
 export default HomePage

@@ -22,7 +22,7 @@ const recommendListCard = [
 
   return (
     <div>
-      <p class="mx-auto mt-10 mb-5 max-w-[1200px] px-5">RECOMMENDED FOR YOU</p>
+      {/* <p class="mx-auto mt-10 mb-5 max-w-[1200px] px-5">RECOMMENDED FOR YOU</p> */}
       <section class="mx-auto grid max-w-[1200px] grid-cols-2 gap-3 px-5 pb-10 lg:grid-cols-4">
         {recommendListCard.map((items)=>
         <div class="flex flex-col">
