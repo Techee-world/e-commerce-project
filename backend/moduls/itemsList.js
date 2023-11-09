@@ -18,8 +18,8 @@ const itemsListSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    imageUrls: {
-      type: Array,
+    images: {
+      type: String,
       required: true,
     },
   },

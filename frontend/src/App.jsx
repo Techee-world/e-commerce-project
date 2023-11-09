@@ -41,7 +41,7 @@ function App() {
           <Route path="/signup" element={<SignUpPage adminNavHandle={adminNavHandle} />}/>
         <Route path="/login"element={<LoginPage setLoginMail={setLoginMail} />}/>
           <Route path="/adminSign" element={<AdminSign userNavHandle={userNavHandle} />}/>
-       <Route path="/adminList" element={<AdminList />} />
+      <Route path="/adminList" element={<AdminList />} />
         <Route path="/adminLog" element={<AdminLog />} />
         <Route path="/adminProfile" element={<AdminProfile />} />
       </Routes>

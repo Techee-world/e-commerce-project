@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const AdminList = () => {
-  const [files, setFiles] = useState();
   const [error, setError] = useState(null);
   const [imageUrl, setImageUrl] = useState();
   const [formData, setFormData] = useState({
@@ -9,40 +8,47 @@ const AdminList = () => {
     description: "",
     regularPrice: 0,
     discountPrice: 0,
-    images:''
+    images: "",
   });
-function changeHandle(e){
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value 
-    });
-}
- async function formSubmitHandle(e){
-    // e.preventDefault();
-    // try {
-    //     const res = await fetch('/backend/addItem',{
-    //         method : 'POST',
-    //         headers : {'Content-Type': 'application/'},
-    //         body : JSON.stringify(formData)
-    //     })
-    //     const data = await res.json();
-    //     if (data.success === false) {
-    //       setError(data.message);
-    //       return;
-    //     }
-    // } catch (error) {
-    //     setError(error.message)
-    // }
-}
-console.log(formData,',,formData.,,');
-console.log(imageUrl, ",,img.,,");
+  function changeHandle(e) {
+     if (e.target.files && e.target.files[0]) {
+         setImageUrl(URL.createObjectURL(e.target.files[0]));
+       setFormData(URL.createObjectURL(e.target.files[0]));
+     }
+      setFormData({
+        ...formData,
+        [e.target.id]: e.target.value,
+        
+      });
+  }
+  const formSubmitHandle = async (e) => {
+    e.preventDefault();
+    try {
+      const respond = await fetch("/backend/addItem", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const dataItem = await respond.json();
+      if (dataItem.success === false) {
+        setError(dataItem.message);
+        return;
+      }
+      alert('items adding is successful')
+    } catch (error) {
+      setError(error.message);
+    }
+  };
   return (
     <div className="md:pb-20">
       <main className="p-3 max-w-4xl mx-auto">
         <h1 className="text-3xl font-semibold text-center my-7">
           Create a Listing
         </h1>
-        <form onClick={formSubmitHandle} className="flex flex-col sm:flex-row gap-4">
+        <form
+          onSubmit={formSubmitHandle}
+          className="flex flex-col sm:flex-row gap-4"
+        >
           <div className="flex flex-col gap-4 flex-1">
             <input
               onChange={changeHandle}
@@ -51,8 +57,6 @@ console.log(imageUrl, ",,img.,,");
               placeholder="Name"
               className="border p-3 rounded-lg"
               id="name"
-              maxLength="62"
-              minLength="10"
               required
             />
             <textarea
@@ -72,8 +76,6 @@ console.log(imageUrl, ",,img.,,");
                     value={formData.regularPrice}
                     type="number"
                     id="regularPrice"
-                    min="50"
-                    max="10000000"
                     required
                     className="p-3 border border-gray-300 rounded-lg"
                   />
@@ -89,8 +91,6 @@ console.log(imageUrl, ",,img.,,");
                     value={formData.discountPrice}
                     type="number"
                     id="discountPrice"
-                    min="0"
-                    max="10000000"
                     required
                     className="p-3 border border-gray-300 rounded-lg"
                   />
@@ -110,28 +110,21 @@ console.log(imageUrl, ",,img.,,");
               </p>
               <div className="flex gap-2">
                 <input
-                  onChange={(e) => setFiles(e.target.files[0])}
+                //   onChange={onImageChange}
+                  onChange={changeHandle}
                   className="p-3 border border-gray-300 rounded w-full"
                   type="file"
                   id="images"
                   accept="image/*"
                   multiple
                 />
-                <span
-                  className="border w-6 p-1 bg-red-300  cursor-pointer"
-                  onClick={() => {
-                    files && setImageUrl(URL.createObjectURL(files));
-                  }}
-                >
-                  <img
-                    className="w-6 pt-6 "
-                    src="https://cdn-icons-png.flaticon.com/128/8151/8151726.png"
-                    alt=""
-                  />
-                </span>
+
                 <img src={imageUrl} className="w-16 h-16 " alt="image" />
               </div>
-              <button className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
+              <button
+                type="submit"
+                className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+              >
                 list items
               </button>
               {error && <p className="text-red-700 text-sm">{error}</p>}
